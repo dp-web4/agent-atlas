@@ -1,0 +1,20 @@
+agent-atlas
+Copyright 2026 Metalinxx Inc. and the dp-web4 contributors.
+
+This product includes software and specifications developed by the ctx project
+(https://github.com/ctxrs/ctx), licensed under the Apache License, Version 2.0.
+
+Read side (derived from ctx):
+  - read/agent-history-v1/schema.json and read/agent-history-v1/README.ctx.md are
+    vendored from ctxrs/ctx unmodified (the agent-history-v1 read contract).
+  - read/providers.md is derived from ctx's CaptureProvider registry
+    (crates/ctx-history-core/src/source.rs). The provider identifiers are ctx's;
+    they are reformatted here into a standalone read/talk-to coverage table.
+
+Talk-to side (original work):
+  - talk-to/ (the integration-surface schema and the claude-code and kimi
+    descriptors) is original work contributed by the dp-web4 project, derived from
+    the hestia repository (https://github.com/dp-web4/hestia).
+
+Per Apache-2.0 section 4(b), any file modified from its ctx original carries an
+in-file notice of the change. Files under read/agent-history-v1/ are unmodified.
