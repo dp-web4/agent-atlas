@@ -4,8 +4,8 @@
 
 Every coding-agent harness (Claude Code, Codex, Cursor, Gemini, Kimi, Cline, Goose, and dozens more) stores its session history somewhere, in some format, and exposes some way to hook into it. Today every tool that wants to work across harnesses reverse-engineers each one from its binaries. agent-atlas is a single, versioned, contributable registry that retires that tax, in two halves:
 
-- **Read** — where each harness keeps its transcript, and in what format. How to *observe* what an agent did. This half builds directly on the excellent work already done by [**ctx**](https://github.com/ctxrs/ctx) (its `agent-history-v1` contract and its provider registry across 41 harnesses).
-- **Talk-to** — each harness's *integration surface*: its hook system (which events exist, which can **block**, and their failure semantics), its config format, and its capabilities. How to *drive and gate* an agent, not just read its history. This is the half that doesn't exist yet, and it's what agent-atlas adds.
+- **Read** - where each harness keeps its transcript, and in what format. How to *observe* what an agent did. This half builds directly on the excellent work already done by [**ctx**](https://github.com/ctxrs/ctx) (its `agent-history-v1` contract and its provider registry across 41 harnesses).
+- **Talk-to** - each harness's *integration surface*: its hook system (which events exist, which can **block**, and their failure semantics), its config format, and its capabilities. How to *drive and gate* an agent, not just read its history. This is the half that doesn't exist yet, and it's what agent-atlas adds.
 
 Put the two together and you get the full "how to work with harness X": read what it did, and hook into what it's about to do.
 

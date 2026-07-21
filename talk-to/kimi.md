@@ -1,6 +1,6 @@
 # Talk-to: Kimi Code CLI
 
-**Fidelity: verified** — reverse-engineered and wired against the real Kimi Code
+**Fidelity: verified** - reverse-engineered and wired against the real Kimi Code
 CLI in [hestia/plugins/kimi](https://github.com/dp-web4/hestia/tree/main/plugins/kimi),
 run in warn and enforce modes.
 

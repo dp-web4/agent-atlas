@@ -5,7 +5,7 @@ agent-atlas is a registry; contributions are almost always documentation, not co
 ## Add a talk-to descriptor (the common case)
 
 Pick a harness from [`read/providers.md`](read/providers.md) whose talk-to column
-is `—`, and write `talk-to/<harness>.md` against
+is ` - `, and write `talk-to/<harness>.md` against
 [`talk-to/SCHEMA.md`](talk-to/SCHEMA.md). Answer every section, and above all state
 the **failure mode** honestly: whether the hook engine fails open or fails closed.
 Mark the descriptor's **fidelity** (`verified` / `documented` / `inferred`) per its

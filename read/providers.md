@@ -21,52 +21,52 @@ descriptor exists in this repo against [`../talk-to/SCHEMA.md`](../talk-to/SCHEM
 |---|---|---|
 | Claude Code | `claude` | [claude-code](../talk-to/claude-code.md) |
 | Kimi Code CLI | `kimi_code_cli` | [kimi](../talk-to/kimi.md) |
-| Codex | `codex` | — |
-| Cursor | `cursor` | — |
-| Gemini | `gemini` | — |
-| Copilot CLI | `copilot_cli` | — |
-| Qwen Code | `qwen_code` | — |
-| Cline | `cline` | — |
-| Roo Code | `roo_code` | — |
-| Goose | `goose` | — |
-| OpenCode | `opencode` | — |
-| OpenHands | `openhands` | — |
-| Continue | `continue` | — |
-| Windsurf | `windsurf` | — |
-| Zed | `zed` | — |
-| Tabnine | `tabnine` | — |
-| Warp | `warp` | — |
-| Trae | `trae` | — |
-| Crush | `crush` | — |
-| Pi | `pi` | — |
-| Kilo | `kilo` | — |
-| Kiro CLI | `kiro_cli` | — |
-| Antigravity | `antigravity` | — |
-| Factory.ai Droid | `factory_ai_droid` | — |
-| Auggie | `auggie` | — |
-| Junie | `junie` | — |
-| Firebender | `firebender` | — |
-| Forge Code | `forgecode` | — |
-| DeepAgents | `deepagents` | — |
-| Mistral Vibe | `mistral_vibe` | — |
-| Mux | `mux` | — |
-| Rovo Dev | `rovodev` | — |
-| OpenClaw | `openclaw` | — |
-| Hermes | `hermes` | — |
-| NanoClaw | `nanoclaw` | — |
-| AstrBot | `astrbot` | — |
-| Shelley | `shelley` | — |
-| Lingma | `lingma` | — |
-| Qoder | `qoder` | — |
-| CodeBuddy | `codebuddy` | — |
-| MiMoCode | `mimocode` | — |
+| Codex | `codex` | - |
+| Cursor | `cursor` | - |
+| Gemini | `gemini` | - |
+| Copilot CLI | `copilot_cli` | - |
+| Qwen Code | `qwen_code` | - |
+| Cline | `cline` | - |
+| Roo Code | `roo_code` | - |
+| Goose | `goose` | - |
+| OpenCode | `opencode` | - |
+| OpenHands | `openhands` | - |
+| Continue | `continue` | - |
+| Windsurf | `windsurf` | - |
+| Zed | `zed` | - |
+| Tabnine | `tabnine` | - |
+| Warp | `warp` | - |
+| Trae | `trae` | - |
+| Crush | `crush` | - |
+| Pi | `pi` | - |
+| Kilo | `kilo` | - |
+| Kiro CLI | `kiro_cli` | - |
+| Antigravity | `antigravity` | - |
+| Factory.ai Droid | `factory_ai_droid` | - |
+| Auggie | `auggie` | - |
+| Junie | `junie` | - |
+| Firebender | `firebender` | - |
+| Forge Code | `forgecode` | - |
+| DeepAgents | `deepagents` | - |
+| Mistral Vibe | `mistral_vibe` | - |
+| Mux | `mux` | - |
+| Rovo Dev | `rovodev` | - |
+| OpenClaw | `openclaw` | - |
+| Hermes | `hermes` | - |
+| NanoClaw | `nanoclaw` | - |
+| AstrBot | `astrbot` | - |
+| Shelley | `shelley` | - |
+| Lingma | `lingma` | - |
+| Qoder | `qoder` | - |
+| CodeBuddy | `codebuddy` | - |
+| MiMoCode | `mimocode` | - |
 
 ## Dev-context sources (not agents)
 
 ctx also reads non-agent developer context, carried here for completeness. These
 have no talk-to surface (there is nothing to gate):
 
-`shell`, `git`, `jj`, `gh` — and `custom` / `unknown` as catch-alls.
+`shell`, `git`, `jj`, `gh` - and `custom` / `unknown` as catch-alls.
 
 ---
 

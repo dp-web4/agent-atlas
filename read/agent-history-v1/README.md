@@ -3,8 +3,8 @@
 This directory is the **read contract**, vendored **unmodified** from
 [ctxrs/ctx](https://github.com/ctxrs/ctx) under the Apache License 2.0:
 
-- [`schema.json`](schema.json) — the `agent-history-v1` JSON schema.
-- [`README.ctx.md`](README.ctx.md) — ctx's own contract documentation, verbatim.
+- [`schema.json`](schema.json) - the `agent-history-v1` JSON schema.
+- [`README.ctx.md`](README.ctx.md) - ctx's own contract documentation, verbatim.
 
 It is the canonical interface for reading coding-agent history (the `status`,
 `init`, `sources`, `importHistory`/`sync`, `search`, `show` operations). ctx is the

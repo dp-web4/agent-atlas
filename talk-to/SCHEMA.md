@@ -51,8 +51,8 @@ where its facts were verified (a real config, a real run), not a vendor's docs.
 
 Mark each descriptor's fidelity honestly, so a consumer knows how far to trust it:
 
-- **verified** — wired against the real harness and exercised.
-- **documented** — from the harness's own docs, not yet run.
-- **inferred** — reverse-engineered, unconfirmed.
+- **verified** - wired against the real harness and exercised.
+- **documented** - from the harness's own docs, not yet run.
+- **inferred** - reverse-engineered, unconfirmed.
 
 A descriptor that has never touched the real harness is `inferred` until it has.

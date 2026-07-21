@@ -1,6 +1,6 @@
 # Talk-to: Claude Code
 
-**Fidelity: verified** — Claude Code is the live reference gate the
+**Fidelity: verified** - Claude Code is the live reference gate the
 [hestia claude-code plugin](https://github.com/dp-web4/hestia/tree/main/plugins/claude-code)
 runs on; its hook path is exercised in production use. The fuller event list below
 is documented from Claude Code's hook system; the blocking path and failure mode
