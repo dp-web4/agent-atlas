@@ -42,8 +42,11 @@ run in warn and enforce modes.
 ## 3. Config
 - **Path**: `~/.kimi-code/config.toml`.
 - **Format**: TOML. `[[hooks]]` blocks map an event to a command.
-- **Knobs that matter**: set `[upgrade] auto_install = false` in `tui.toml` so the
-  audited binary does not silently drift under you.
+- **Knobs that matter**: set `[upgrade] auto_install = false` in `tui.toml` to resist
+  silent binary drift — but note it is not airtight: a 0.26→0.28.1 update was observed
+  to land with this already set to `false`, so some update path (manual `upgrade`, or
+  the web/server daemon) bypasses it. Re-verify the gate after any version change;
+  don't assume the pin held.
 
 ## 4. Transcript pointer
 - **Path pattern**: `~/.kimi-code/sessions/<slug>/<id>/agents/main/wire.jsonl`,
@@ -59,15 +62,19 @@ run in warn and enforce modes.
 - **Self-model gotcha**: Kimi's trained self-model wrongly believes it has no
   hooks. It does. A session will re-derive that error unless corrected (the hestia
   adapter carries the correction in its `AGENTS.md`).
-- **Approval modes are a separate layer from hooks (verified 2026-07-21).** Kimi has
-  three approval modes — `manual` / `auto` / `yolo` — set by flag (`-y`/`--yolo` =
-  "auto-approve all actions", Kimi's `--dangerously-skip-permissions`; `--auto` =
-  auto-approve safe ops), by config (`default_permission_mode`), or in-session
-  (`/permission`, `/auto`, `/yolo`). These control only the interactive **approval
-  prompt**. They do **not** suppress the hook subsystem: a `PreToolUse` hook still
-  fires and its `exit 2` deny is still honored in `yolo` mode (confirmed live — a
-  Bash call was gated and denied under `yolo`). A gate therefore sits *below* the
-  approval layer and cannot be bypassed by launching with `-y`.
+- **Approval modes are a separate layer from hooks (verified live, v0.28.1).** Kimi
+  has three approval modes — `manual` / `auto` / `yolo` — set by flag, by config
+  (`default_permission_mode`), or in-session (`/permission`, `/auto`, `/yolo`). Their
+  aggressiveness has *shifted across versions*, so pin the version when reasoning about
+  them: in **v0.28.1**, `--auto` is the fully-autonomous "never ask" mode (the closest
+  analog to Claude's `--dangerously-skip-permissions`) and `-y`/`--yolo` is milder
+  ("auto-approve regular tool calls; the agent may still ask"); the ~v0.26 build had
+  `--yolo` as the auto-approve-everything one. Regardless of which is most permissive,
+  these control only the interactive **approval prompt** — they do **not** suppress the
+  hook subsystem: a `PreToolUse` hook still fires and its `exit 2` deny is still
+  honored, verified under the *most* permissive mode (`auto`) on v0.28.1 (a destructive
+  Bash call was gated and denied). A gate sits *below* the approval layer and cannot be
+  bypassed by any approval mode.
 - **Headless guard**: `-p`/`--prompt` refuses to combine with `-y` or `--auto`
   ("Cannot combine --prompt with --yolo"), so `kimi -p -y` in a script is blocked;
   headless auto-approve requires setting `default_permission_mode` in config.
