@@ -10,7 +10,7 @@
 - **fails closed** (5): a failed hook *denies* — safer, but a slow gate can halt the agent.
 - **undocumented** (7): the vendor spec omits the error/timeout behavior. Treat as fail-open until verified.
 
-Fidelity: 2 verified (wired against the real harness), 42 documented (from vendor docs), 1 inferred.
+Fidelity: 3 verified (wired against the real harness), 41 documented (from vendor docs), 1 inferred.
 
 ## Matrix
 
@@ -24,7 +24,7 @@ Fidelity: 2 verified (wired against the real harness), 42 documented (from vendo
 | Claude Code | `claude` | ✓ | canonical | hook engine | **open** ⚠ | verified |
 | Cline | `cline` | ✓ | independent | hook engine | **open** ⚠ | documented |
 | CodeBuddy | `codebuddy` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Codex CLI | `codex` | ✓ | claude | hook engine | **open** ⚠ | documented |
+| Codex CLI | `codex` | ✓ | claude | hook engine | **open** ⚠ | verified |
 | Cody | `cody` | — | independent | no gate seam | — | documented |
 | Continue | `continue` | ✓ | independent | no gate seam | undocumented | documented |
 | GitHub Copilot CLI | `copilot_cli` | ✓ | claude | hook engine | closed | documented |
