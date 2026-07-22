@@ -59,3 +59,17 @@ run in warn and enforce modes.
 - **Self-model gotcha**: Kimi's trained self-model wrongly believes it has no
   hooks. It does. A session will re-derive that error unless corrected (the hestia
   adapter carries the correction in its `AGENTS.md`).
+- **Approval modes are a separate layer from hooks (verified 2026-07-21).** Kimi has
+  three approval modes — `manual` / `auto` / `yolo` — set by flag (`-y`/`--yolo` =
+  "auto-approve all actions", Kimi's `--dangerously-skip-permissions`; `--auto` =
+  auto-approve safe ops), by config (`default_permission_mode`), or in-session
+  (`/permission`, `/auto`, `/yolo`). These control only the interactive **approval
+  prompt**. They do **not** suppress the hook subsystem: a `PreToolUse` hook still
+  fires and its `exit 2` deny is still honored in `yolo` mode (confirmed live — a
+  Bash call was gated and denied under `yolo`). A gate therefore sits *below* the
+  approval layer and cannot be bypassed by launching with `-y`.
+- **Headless guard**: `-p`/`--prompt` refuses to combine with `-y` or `--auto`
+  ("Cannot combine --prompt with --yolo"), so `kimi -p -y` in a script is blocked;
+  headless auto-approve requires setting `default_permission_mode` in config.
+- **Session resume**: `-c`/`--continue` (resume the cwd's previous session) and
+  `-S`/`--session [id]` mirror Claude Code's `--continue`/`--resume`.
