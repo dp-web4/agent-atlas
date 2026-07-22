@@ -22,6 +22,13 @@ talk-to halves of a harness by a single id, with no lookup table. The directory
 also leaves room to grow later (a `examples/` with a sample hook config, a vendored
 config template) without moving anything.
 
+**Talk-to ahead of read.** Some harnesses have an integration surface worth
+describing but are not yet in ctx's read registry. Give those a natural id for the
+directory (e.g. `aider`, `amp`) and set `ctx_provider: none` in frontmatter. When ctx
+later adds a read provider for the harness, rename the directory to the ctx id so the
+two halves rejoin. These are listed in a separate section of
+[`../read/providers.md`](../read/providers.md).
+
 ## Frontmatter (required): the machine-readable facts
 
 Every `descriptor.md` opens with a YAML frontmatter block carrying the load-bearing
