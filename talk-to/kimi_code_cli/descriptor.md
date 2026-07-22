@@ -80,3 +80,11 @@ run in warn and enforce modes.
   headless auto-approve requires setting `default_permission_mode` in config.
 - **Session resume**: `-c`/`--continue` (resume the cwd's previous session) and
   `-S`/`--session [id]` mirror Claude Code's `--continue`/`--resume`.
+- **No SessionStart context injection (verified live, v0.28.1).** The `SessionStart`
+  hook *fires*, but Kimi injects **neither** raw hook stdout **nor** a Claude-style
+  `hookSpecificOutput.additionalContext` JSON into the model's context (both tested, a
+  sentinel emitted from a SessionStart hook does not reach the model). So unlike Claude
+  Code, there is **no live recall-at-boot channel via hooks**. A memory/recall adapter
+  must instead rewrite the deployed `AGENTS.md` (which *is* assembled into the system
+  prompt at the next boot) — that is the only working injection path. Emitting a context
+  block to hook stdout is a silent no-op.
