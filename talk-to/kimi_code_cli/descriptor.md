@@ -1,3 +1,19 @@
+---
+harness: Kimi Code CLI
+ctx_provider: kimi_code_cli
+vendor: Moonshot AI
+lineage: claude
+hook_engine: true
+blocking_capable: true
+blocking_events: [PreToolUse, UserPromptSubmit, Stop]
+fails_open: true
+config_path: ~/.kimi-code/config.toml
+config_format: toml
+fidelity: verified
+sources:
+  - https://github.com/dp-web4/hestia/tree/main/plugins/kimi
+---
+
 # Talk-to: Kimi Code CLI
 
 **Fidelity: verified** - reverse-engineered and wired against the real Kimi Code
@@ -8,7 +24,7 @@ run in warn and enforce modes.
 - **Harness**: Kimi Code CLI ([Moonshot AI](https://www.moonshot.ai/)).
 - **ctx provider (read)**: `kimi_code_cli` (ctx source-format id `kimi_code_cli_wire_jsonl_tree`).
 - **Lineage**: a near-clone of Claude Code's hook engine. Its failure semantics and
-  event model follow the Claude-Code lineage; see [`claude-code.md`](claude-code.md).
+  event model follow the Claude-Code lineage; see [`../claude/descriptor.md`](../claude/descriptor.md).
 
 ## 2. Hook engine
 - **Events**: a 16-event engine, including `PreToolUse`, `PostToolUse`,

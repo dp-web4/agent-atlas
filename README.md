@@ -20,19 +20,29 @@ The whole thing describes the *tools*, never anyone's private work, so there is 
 ```
 read/                       # how to read each harness (from ctx, Apache-2.0)
   agent-history-v1/         # ctx's read contract (schema + spec), vendored
-  providers.md             # the harness registry: read + talk-to coverage per harness
+  providers.md              # the harness registry: read + talk-to coverage per harness
 talk-to/                    # how to drive/gate each harness (this project's contribution)
-  SCHEMA.md                # the integration-surface descriptor schema
-  claude-code.md           # descriptor
-  kimi.md                  # descriptor
+  SCHEMA.md                 # the integration-surface descriptor schema
+  <ctx-provider-id>/        # one directory per harness, named by its ctx id (the join key)
+    descriptor.md           # frontmatter (machine-readable facts) + prose descriptor
+  claude/descriptor.md
+  kimi_code_cli/descriptor.md
 ```
+
+Each harness directory is named by its **ctx provider id**, so the read side
+(`providers.md`) and the talk-to side join on one id with no lookup table. Every
+`descriptor.md` opens with YAML frontmatter carrying the load-bearing facts
+(`fails_open`, `blocking_events`, `config_path`, `fidelity`, `sources`) so a tool can
+consume the registry without parsing prose.
 
 ## Coverage today
 
 - **Read: 41 coding-agent harnesses**, inherited from ctx's provider registry. See [`read/providers.md`](read/providers.md).
-- **Talk-to: 2 harnesses** with real, working descriptors, [`claude-code`](talk-to/claude-code.md) and [`kimi`](talk-to/kimi.md), both derived from live adapters in [hestia](https://github.com/dp-web4/hestia). The rest are open contributions waiting to happen; the schema is the same for all of them.
+- **Talk-to: 41 descriptors**, one per harness, each with a `fidelity` mark in its frontmatter:
+  - **verified** (2): [`claude`](talk-to/claude/descriptor.md) and [`kimi_code_cli`](talk-to/kimi_code_cli/descriptor.md), derived from live adapters in [hestia](https://github.com/dp-web4/hestia) and exercised in production.
+  - **documented / inferred** (the rest): built from each vendor's official docs, cited per fact, not yet wired against the real harness.
 
-This is an early, honest starting point: the read side is broad (ctx's), the talk-to side is deep on two and empty on the rest. Adding a harness's talk-to descriptor is a documentation task, not a code port. See [CONTRIBUTING.md](CONTRIBUTING.md).
+The fidelity mark is the honesty knob: a `documented` descriptor is a solid starting point drawn from vendor docs; raising it to `verified` means someone wired it against the real harness and ran it. Both improving a descriptor and lifting its fidelity are documentation tasks, not code ports. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Relationship to ctx
 

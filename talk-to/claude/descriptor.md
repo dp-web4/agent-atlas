@@ -1,3 +1,20 @@
+---
+harness: Claude Code
+ctx_provider: claude
+vendor: Anthropic
+lineage: canonical
+hook_engine: true
+blocking_capable: true
+blocking_events: [PreToolUse, UserPromptSubmit, Stop]
+fails_open: true
+config_path: ~/.claude/settings.json
+config_format: json
+fidelity: verified
+sources:
+  - https://docs.anthropic.com/en/docs/claude-code/hooks
+  - https://github.com/dp-web4/hestia/tree/main/plugins/claude-code
+---
+
 # Talk-to: Claude Code
 
 **Fidelity: verified** - Claude Code is the live reference gate the
