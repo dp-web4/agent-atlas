@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [pre_tool, post_tool, post_agent]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.vibe/config.toml (config); ~/.vibe/hooks.toml + ./.vibe/hooks.toml (hooks)
 config_format: toml
 fidelity: documented

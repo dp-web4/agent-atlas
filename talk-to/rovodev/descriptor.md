@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: true
 blocking_events: [toolPermissions]
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: ~/.rovodev/config.yml
 config_format: yaml
 fidelity: documented

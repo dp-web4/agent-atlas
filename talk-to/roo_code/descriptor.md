@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: n/a
+subagent_hooks_inherited: untested
 config_path: VS Code settings.json (roo-cline.* keys) + in-UI auto-approve
 config_format: json
 fidelity: documented

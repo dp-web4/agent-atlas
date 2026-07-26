@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [wrap_tool_call, before_agent, after_agent, HITL-interrupt]
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: ~/.deepagents/config.toml
 config_format: toml
 fidelity: documented

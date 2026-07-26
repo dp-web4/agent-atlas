@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, UserPromptSubmit, Stop]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: none (hooks configured programmatically via Claude Agent SDK ClaudeAgentOptions); .mcp.json for MCP servers
 config_format: python / json
 fidelity: inferred

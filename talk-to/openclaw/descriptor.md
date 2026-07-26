@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [before_tool_call, before_install]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.openclaw/openclaw.json
 config_format: json5
 fidelity: documented

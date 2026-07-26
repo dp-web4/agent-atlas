@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [tool.execute.before, permission.asked]
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: ~/.config/opencode/opencode.json
 config_format: json
 fidelity: documented

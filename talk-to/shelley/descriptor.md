@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [system-prompt, new-conversation, chat-message]
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: $HOME/.config/shelley/hooks/<name>
 config_format: executable scripts (stdin JSON/text -> stdout)
 fidelity: documented

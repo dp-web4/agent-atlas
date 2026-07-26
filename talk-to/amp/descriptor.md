@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [tool.call]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.config/amp/settings.json
 config_format: json
 fidelity: documented

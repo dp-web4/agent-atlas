@@ -80,6 +80,20 @@ semantics explicitly.
   **fails open** (resolves to *allow*) or **fails closed** (resolves to *deny*).
   If it fails open, say so in bold: *a gate on this harness has to be the
   fail-closed party itself; it cannot rely on the engine.*
+- **`subagent_hooks_inherited`** (load-bearing): whether tool calls made by a
+  SUB-AGENT / spawned sub-session fire the same hooks as the main loop. If they do
+  not, `"spawn a subagent to do it"` is a one-step gate bypass that needs no
+  cleverness at all, and any gate on the harness is worth much less than it looks.
+  Values:
+  `verified-inherited` (measured: a sub-agent call was denied AND witnessed),
+  `verified-not-inherited` (measured: it was not),
+  `untested` (**the default — nobody has looked**).
+  `untested` is not a synonym for safe. It is the honest statement that the most
+  consequential question about a harness's gate is open, and it must stay `untested`
+  until someone has actually run a sub-agent probe against that harness.
+- **`subagent_attribution`**: whose identity a sub-agent's actions are recorded
+  under. `parent` means the record cannot distinguish main-loop from sub-agent
+  action — enforcement can be intact while accountability granularity is not.
 
 ### 3. Config
 - **Path**: where the harness reads its hook/config from.

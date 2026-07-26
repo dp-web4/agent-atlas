@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, PermissionRequest, UserPromptSubmit]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.qwen/settings.json (also project .qwen/settings.json)
 config_format: json
 fidelity: documented

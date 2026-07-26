@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [preToolUse, permissionRequest, userPromptSubmitted]
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: ~/.copilot/hooks/*.json
 config_format: json
 fidelity: documented

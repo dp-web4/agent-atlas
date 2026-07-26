@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, UserPromptSubmit, Stop]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.kimi-code/config.toml
 config_format: toml
 fidelity: verified

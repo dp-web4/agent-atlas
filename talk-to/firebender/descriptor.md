@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: firebender.json (project root); .firebender/rules/*.mdc
 config_format: json (rules: markdown/mdc with YAML frontmatter)
 fidelity: documented

@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, PermissionRequest, PostToolUse, UserPromptSubmit, SubagentStop, Stop]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.codex/config.toml
 config_format: toml
 fidelity: verified

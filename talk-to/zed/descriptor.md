@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.config/zed/settings.json
 config_format: json
 fidelity: documented

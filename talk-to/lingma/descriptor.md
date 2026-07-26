@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [UserPromptSubmit, PreToolUse]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.lingma/settings.json
 config_format: json
 fidelity: documented

@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: n/a
+subagent_hooks_inherited: untested
 config_path: unknown
 config_format: unknown
 fidelity: documented

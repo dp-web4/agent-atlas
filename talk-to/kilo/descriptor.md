@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [tool.execute.before, permission.ask]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.config/kilo/kilo.jsonc (project kilo.jsonc / .kilo/kilo.jsonc)
 config_format: jsonc
 fidelity: documented

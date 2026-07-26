@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [pre_user_prompt, pre_read_code, pre_write_code, pre_run_command, pre_mcp_tool_use]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.codeium/windsurf/hooks.json
 config_format: json
 fidelity: documented

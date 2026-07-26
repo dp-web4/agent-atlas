@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, UserPromptSubmit, PreTaskExec]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: .kiro/agents/*.json (CLI) / .kiro/hooks/*.json (IDE)
 config_format: json
 fidelity: documented

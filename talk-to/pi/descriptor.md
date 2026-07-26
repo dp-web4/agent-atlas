@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [tool_call (permission gate)]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.pi/agent/settings.json (project .pi/settings.json)
 config_format: json
 fidelity: documented

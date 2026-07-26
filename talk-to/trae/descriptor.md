@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: .trae/rules/project_rules.md
 config_format: markdown
 fidelity: documented

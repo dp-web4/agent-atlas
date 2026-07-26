@@ -7,6 +7,9 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, UserPromptSubmit, Stop]
 fails_open: true
+subagent_hooks_inherited: verified-inherited
+subagent_attribution: parent
+subagent_probe_date: 2026-07-26
 config_path: ~/.claude/settings.json
 config_format: json
 fidelity: verified
@@ -40,6 +43,23 @@ are the verified, load-bearing parts.
   errors, times out, or exits unexpectedly resolves to *allow*. **The gate must be
   fail-closed by construction**: deny by default, allow only on an explicit
   confirmed pass.
+
+### Sub-agent inheritance — **verified inherited** (2026-07-26)
+
+Sub-agent tool calls fire the same hooks as the main loop, and they are witnessed.
+Measured by giving a `general-purpose` sub-agent three Bash calls: two benign ones ran,
+and a third — an `echo` whose *text* trips a lexical policy rule — was denied **inside the
+sub-agent** with the harness's normal `PreToolUse` deny. The chain moved in step: +14
+entries, +5 actions, **+1 denial**, carrying both a `policy_decision status=deny` and its
+`outcome`. So on Claude Code, *"spawn a sub-agent to do it"* is **not** a gate bypass.
+
+This is the load-bearing check for any harness that spawns sub-sessions, and it is the one
+most likely to be assumed rather than measured. The rest of the registry is honestly
+`untested` on it.
+
+**Caveat — attribution, not enforcement.** Sub-agent actions are recorded under the
+**parent's** `plugin_id`. Enforcement and witnessing are intact, but the record cannot tell
+main-loop action from sub-agent action, so a fleet of sub-agents appears as one actor.
 
 ## 3. Config
 - **Path**: `~/.claude/settings.json` (and project/local `settings.json`).

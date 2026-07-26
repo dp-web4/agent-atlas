@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse, UserPromptSubmit]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/Documents/Cline/Rules/Hooks/ (global) or .clinerules/hooks/ (project)
 config_format: executable scripts (directory of named executables)
 fidelity: documented

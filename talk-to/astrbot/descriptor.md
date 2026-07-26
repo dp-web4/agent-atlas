@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [on_llm_request, on_using_llm_tool, on_decorating_result, event_message_type, command]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: data/cmd_config.json (core); per-plugin _conf_schema.json + metadata.yaml
 config_format: json / yaml
 fidelity: documented

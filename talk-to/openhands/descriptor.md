@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [agent_action_confirmation, security_analyzer]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: config.toml
 config_format: toml
 fidelity: documented

@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [pre_tool_call]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.hermes/config.yaml
 config_format: yaml
 fidelity: documented

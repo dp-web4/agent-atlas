@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: false
 blocking_events: []
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.mux/config.json
 config_format: json
 fidelity: documented

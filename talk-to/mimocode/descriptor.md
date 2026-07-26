@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [tool.execute.before]
 fails_open: unknown
+subagent_hooks_inherited: untested
 config_path: ~/.config/mimocode/mimocode.jsonc
 config_format: jsonc
 fidelity: documented

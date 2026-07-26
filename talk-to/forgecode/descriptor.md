@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: true
 blocking_events: []
 fails_open: false
+subagent_hooks_inherited: untested
 config_path: .forge.toml (project); ~/.forge/permissions.yaml (gate)
 config_format: toml (permissions: yaml; mcp: json)
 fidelity: documented

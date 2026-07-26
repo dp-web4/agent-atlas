@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [BeforeTool, BeforeAgent, BeforeModel, BeforeToolSelection]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.gemini/settings.json
 config_format: json
 fidelity: documented

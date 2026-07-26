@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [PreToolUse]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: crush.json (project) / ~/.local/share/crush data-dir
 config_format: json
 fidelity: documented

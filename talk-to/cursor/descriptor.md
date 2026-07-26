@@ -7,6 +7,7 @@ hook_engine: true
 blocking_capable: true
 blocking_events: [beforeShellExecution, beforeMCPExecution, beforeReadFile, beforeSubmitPrompt, preToolUse]
 fails_open: true
+subagent_hooks_inherited: untested
 config_path: ~/.cursor/hooks.json
 config_format: json
 fidelity: documented

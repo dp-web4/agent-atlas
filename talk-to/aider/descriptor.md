@@ -7,6 +7,7 @@ hook_engine: false
 blocking_capable: false
 blocking_events: []
 fails_open: n/a
+subagent_hooks_inherited: untested
 config_path: .aider.conf.yml
 config_format: yaml
 fidelity: documented
