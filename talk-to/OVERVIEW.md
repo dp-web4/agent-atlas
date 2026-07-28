@@ -15,9 +15,9 @@ Fidelity: 3 verified (wired against the real harness), 41 documented (from vendo
 **Resource type** — how you pay to run the model, so how freely it can be used (a harness may offer several):
 
 - **subscription** (26): usage-limited, seat/plan-covered, no per-call charge — the safe default for sustained work.
-- **api** (32): metered pay-per-token — expensive, use with caution. Subscription tiers are increasingly a capped skin over the same API backend.
+- **api** (31): metered pay-per-token — expensive, use with caution. Subscription tiers are increasingly a capped skin over the same API backend.
 - **local** (21): self-hosted weights, no external billing — cost is compute.
-- **free** (5): free tier, hard rate limits.
+- **free** (6): free tier, hard rate limits.
 
 ## Matrix
 
@@ -25,7 +25,7 @@ Fidelity: 3 verified (wired against the real harness), 41 documented (from vendo
 |---|---|:--:|---|---|---|---|---|
 | Aider | `aider` | — | independent | no gate seam | — | local, api | documented |
 | Amp | `amp` | — | independent | hook engine | undocumented | subscription, api | documented |
-| Antigravity | `antigravity` | ✓ | claude | hook engine | closed | subscription, api | documented |
+| Antigravity | `antigravity` | ✓ | claude | hook engine | closed | subscription, free | documented |
 | AstrBot | `astrbot` | ✓ | independent | hook engine | undocumented | local, api | documented |
 | Auggie (Augment Code) | `auggie` | ✓ | claude | hook engine | **open** ⚠ | subscription | documented |
 | Claude Code | `claude` | ✓ | canonical | hook engine | **open** ⚠ | subscription, api | verified |
