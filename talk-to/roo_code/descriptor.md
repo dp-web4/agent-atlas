@@ -10,6 +10,7 @@ fails_open: n/a
 subagent_hooks_inherited: untested
 config_path: VS Code settings.json (roo-cline.* keys) + in-UI auto-approve
 config_format: json
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://roocodeinc.github.io/Roo-Code/features/auto-approving-actions

@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: crush.json (project) / ~/.local/share/crush data-dir
 config_format: json
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://github.com/charmbracelet/crush/blob/main/docs/hooks/README.md

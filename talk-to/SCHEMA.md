@@ -48,6 +48,7 @@ blocking_events: [PreToolUse, UserPromptSubmit, Stop]
 fails_open: true                 # LOAD-BEARING: does a failed blocking hook resolve to allow? (true|false|unknown|n/a — n/a when hook_engine is false)
 config_path: ~/.claude/settings.json
 config_format: json              # json | toml | yaml | ...
+resource_type: [subscription, api]  # access/cost profile(s) the model runs under (list; a harness can offer several)
 fidelity: verified               # verified | documented | inferred
 sources:
   - https://docs.anthropic.com/en/docs/claude-code/hooks
@@ -57,6 +58,29 @@ sources:
 If a harness exposes no integration surface at all (a pure autocomplete plugin, a
 closed cloud IDE), say so honestly: `hook_engine: false`, `blocking_capable: false`,
 and a one-line prose note on why. Recorded absence is a real finding, not a gap.
+
+### `resource_type`: the access/cost profile (list)
+
+How you pay to run the harness's model determines how freely a governed member (or
+an operator) can use it, so it is a first-class fact, not a footnote. It is a **list**
+because one harness often offers more than one path (gemini-cli runs under a Code
+Assist subscription *or* a metered API key), and the vocabulary is:
+
+- **`subscription`** — covered by a seat/plan; **usage-limited** but no per-call
+  charge (Claude Max, Gemini Code Assist, a ChatGPT/Codex plan). The safe default for
+  sustained work: a hard cap, not a running meter.
+- **`api`** — **metered pay-per-token**: expensive, use with caution, may or may not
+  be usage-limited (Anthropic/OpenAI/Gemini API keys, Vertex AI). Note the
+  convergence: subscription tiers are increasingly a usage-limited *skin* over the
+  same API backend (gemini's Code Assist routes through `cloudcode-pa.googleapis.com`),
+  so "subscription" means *capped*, not *free of the API*.
+- **`free`** — a free tier: no payment, **hard rate limits** (a free API key, a free
+  CLI tier). Fine for a shakedown, throttled for real work.
+- **`local`** — self-hosted model weights, **no external billing** (ollama /
+  llama.cpp behind the harness). Cost is compute, not per-token.
+
+Use `[unknown]` when the access model has not been checked yet — an honest gap, like
+`fails_open: unknown`.
 
 ## Prose sections
 

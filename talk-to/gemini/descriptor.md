@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.gemini/settings.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://github.com/google-gemini/gemini-cli/blob/main/docs/hooks/reference.md

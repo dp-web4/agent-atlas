@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.codebuddy/settings.json
 config_format: json
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://www.codebuddy.ai/docs/cli/hooks

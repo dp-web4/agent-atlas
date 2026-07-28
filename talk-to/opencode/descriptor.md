@@ -10,6 +10,7 @@ fails_open: false
 subagent_hooks_inherited: untested
 config_path: ~/.config/opencode/opencode.json
 config_format: json
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://opencode.ai/docs/plugins/

@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: .kiro/agents/*.json (CLI) / .kiro/hooks/*.json (IDE)
 config_format: json
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://kiro.dev/docs/hooks/

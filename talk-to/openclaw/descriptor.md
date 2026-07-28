@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.openclaw/openclaw.json
 config_format: json5
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://docs.openclaw.ai/plugins/hooks

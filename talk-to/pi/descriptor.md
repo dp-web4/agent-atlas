@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.pi/agent/settings.json (project .pi/settings.json)
 config_format: json
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/README.md

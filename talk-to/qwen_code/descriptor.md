@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.qwen/settings.json (also project .qwen/settings.json)
 config_format: json
+resource_type: [api, local, free]
 fidelity: documented
 sources:
   - https://qwenlm.github.io/qwen-code-docs/en/users/features/hooks/

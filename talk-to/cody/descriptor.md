@@ -10,6 +10,7 @@ fails_open: n/a
 subagent_hooks_inherited: untested
 config_path: VS Code settings.json (cody.* keys)
 config_format: json
+resource_type: [subscription, free]
 fidelity: documented
 sources:
   - https://sourcegraph.com/docs/cody/capabilities/autocomplete

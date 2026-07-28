@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.hermes/config.yaml
 config_format: yaml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks

@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: data/cmd_config.json (core); per-plugin _conf_schema.json + metadata.yaml
 config_format: json / yaml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://docs.astrbot.app/en/dev/star/guides/listen-message-event.html

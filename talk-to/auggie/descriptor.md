@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.augment/settings.json
 config_format: json
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://docs.augmentcode.com/cli/hooks

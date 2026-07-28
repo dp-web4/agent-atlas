@@ -10,6 +10,7 @@ fails_open: false
 subagent_hooks_inherited: untested
 config_path: $HOME/.config/shelley/hooks/<name>
 config_format: executable scripts (stdin JSON/text -> stdout)
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://github.com/boldsoftware/shelley

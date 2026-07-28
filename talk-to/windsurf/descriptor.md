@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.codeium/windsurf/hooks.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://docs.windsurf.com/windsurf/cascade/hooks

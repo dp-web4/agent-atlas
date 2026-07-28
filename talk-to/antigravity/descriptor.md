@@ -10,6 +10,7 @@ fails_open: false
 subagent_hooks_inherited: untested
 config_path: ~/.gemini/config/hooks.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://antigravity.google/docs/hooks

@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.config/kilo/kilo.jsonc (project kilo.jsonc / .kilo/kilo.jsonc)
 config_format: jsonc
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://kilo.ai/docs/automate/extending/plugins

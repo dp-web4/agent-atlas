@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.config/mimocode/mimocode.jsonc
 config_format: jsonc
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://github.com/XiaomiMiMo/MiMo-Code

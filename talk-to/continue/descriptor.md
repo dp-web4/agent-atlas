@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.continue/config.yaml
 config_format: yaml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://docs.continue.dev/customize/deep-dives/configuration

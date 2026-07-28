@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.lingma/settings.json
 config_format: json
+resource_type: [subscription, free]
 fidelity: documented
 sources:
   - https://help.aliyun.com/en/lingma/qoder-cn/user-guide/hooks

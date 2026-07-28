@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.junie/allowlist.json
 config_format: json
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://junie.jetbrains.com/docs/junie-cli.html

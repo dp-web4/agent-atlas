@@ -14,7 +14,7 @@ import glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FIELDS = ("harness", "ctx_provider", "vendor", "lineage", "hook_engine",
-          "blocking_capable", "fails_open", "fidelity")
+          "blocking_capable", "fails_open", "fidelity", "resource_type")
 
 
 def parse_frontmatter(path):
@@ -44,6 +44,18 @@ def gate_class(fm):
 def fail_cell(fm):
     return {"true": "**open** ⚠", "false": "closed",
             "unknown": "undocumented", "n/a": "—"}.get(fm.get("fails_open", ""), "?")
+
+
+def res_list(fm):
+    """resource_type is a YAML list rendered as a string ('[subscription, api]'); normalize to a
+    clean set of tokens for display + counting."""
+    raw = fm.get("resource_type", "").strip().strip("[]")
+    return [t.strip() for t in raw.split(",") if t.strip()]
+
+
+def res_cell(fm):
+    toks = res_list(fm)
+    return ", ".join(toks) if toks else "?"
 
 
 def main():
@@ -87,16 +99,30 @@ def main():
                f"(from vendor docs), {len([r for r in rows if r.get('fidelity')=='inferred'])} "
                "inferred.\n")
 
-    hdr = ("| Harness | id | ctx read | lineage | gate | fails-open | fidelity |\n"
-           "|---|---|:--:|---|---|---|---|")
+    def rescount(tok):
+        return len([r for r in rows if tok in res_list(r)])
+    unknown_res = len([r for r in rows if not res_list(r) or res_list(r) == ["unknown"]])
+    out.append("**Resource type** — how you pay to run the model, so how freely it can be used "
+               "(a harness may offer several):\n")
+    out.append(f"- **subscription** ({rescount('subscription')}): usage-limited, seat/plan-covered, "
+               "no per-call charge — the safe default for sustained work.")
+    out.append(f"- **api** ({rescount('api')}): metered pay-per-token — expensive, use with caution. "
+               "Subscription tiers are increasingly a capped skin over the same API backend.")
+    out.append(f"- **local** ({rescount('local')}): self-hosted weights, no external billing — cost "
+               "is compute.")
+    out.append(f"- **free** ({rescount('free')}): free tier, hard rate limits."
+               + (f" _{unknown_res} not yet checked (`unknown`)._" if unknown_res else "") + "\n")
+
+    hdr = ("| Harness | id | ctx read | lineage | gate | fails-open | resource | fidelity |\n"
+           "|---|---|:--:|---|---|---|---|---|")
     out.append("## Matrix\n")
     out.append(hdr)
     for r in rows:
         read = "—" if r.get("ctx_provider") == "none" else "✓"
-        out.append("| {h} | `{i}` | {rd} | {ln} | {g} | {fo} | {fi} |".format(
+        out.append("| {h} | `{i}` | {rd} | {ln} | {g} | {fo} | {rs} | {fi} |".format(
             h=r.get("harness", r["_id"]), i=r["_id"], rd=read,
             ln=r.get("lineage", "?"), g=gate_class(r), fo=fail_cell(r),
-            fi=r.get("fidelity", "?")))
+            rs=res_cell(r), fi=r.get("fidelity", "?")))
     out.append("")
     out.append("_ctx read: ✓ = ctx has a read provider for this id; — = talk-to ahead of "
                "read (`ctx_provider: none`)._")

@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: none (hooks configured programmatically via Claude Agent SDK ClaudeAgentOptions); .mcp.json for MCP servers
 config_format: python / json
+resource_type: [subscription, api]
 fidelity: inferred
 sources:
   - https://github.com/nanocoai/nanoclaw

@@ -10,6 +10,7 @@ fails_open: n/a
 subagent_hooks_inherited: untested
 config_path: .aider.conf.yml
 config_format: yaml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://aider.chat/docs/config/aider_conf.html

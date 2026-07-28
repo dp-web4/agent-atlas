@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: firebender.json (project root); .firebender/rules/*.mdc
 config_format: json (rules: markdown/mdc with YAML frontmatter)
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://docs.firebender.com/multi-agent/global-rules

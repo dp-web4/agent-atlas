@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/Documents/Cline/Rules/Hooks/ (global) or .clinerules/hooks/ (project)
 config_format: executable scripts (directory of named executables)
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://cline.ghost.io/cline-v3-36-hooks/

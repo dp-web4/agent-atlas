@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: config.toml
 config_format: toml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://docs.openhands.dev/sdk/guides/security

@@ -10,6 +10,7 @@ fails_open: false
 subagent_hooks_inherited: untested
 config_path: ~/.copilot/hooks/*.json
 config_format: json
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://docs.github.com/en/copilot/reference/hooks-reference

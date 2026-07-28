@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.vibe/config.toml (config); ~/.vibe/hooks.toml + ./.vibe/hooks.toml (hooks)
 config_format: toml
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://docs.mistral.ai/vibe/code/cli/hooks

@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.config/zed/settings.json
 config_format: json
+resource_type: [subscription, api, local]
 fidelity: documented
 sources:
   - https://zed.dev/docs/ai/agent-panel

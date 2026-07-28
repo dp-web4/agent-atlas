@@ -10,6 +10,7 @@ fails_open: false
 subagent_hooks_inherited: untested
 config_path: ~/.rovodev/config.yml
 config_format: yaml
+resource_type: [subscription]
 fidelity: documented
 sources:
   - https://support.atlassian.com/rovo/docs/manage-rovo-dev-cli-settings/

@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: .tabnine/agent/settings.json
 config_format: json
+resource_type: [subscription, local]
 fidelity: documented
 sources:
   - https://docs.tabnine.com/main/getting-started/tabnine-cli/features/hooks

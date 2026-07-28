@@ -12,6 +12,7 @@ subagent_attribution: parent
 subagent_probe_date: 2026-07-26
 config_path: ~/.claude/settings.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: verified
 sources:
   - https://docs.anthropic.com/en/docs/claude-code/hooks

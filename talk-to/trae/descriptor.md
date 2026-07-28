@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: .trae/rules/project_rules.md
 config_format: markdown
+resource_type: [subscription, free]
 fidelity: documented
 sources:
   - https://traeide.com/news/6

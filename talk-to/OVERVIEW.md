@@ -12,54 +12,61 @@
 
 Fidelity: 3 verified (wired against the real harness), 41 documented (from vendor docs), 1 inferred.
 
+**Resource type** — how you pay to run the model, so how freely it can be used (a harness may offer several):
+
+- **subscription** (26): usage-limited, seat/plan-covered, no per-call charge — the safe default for sustained work.
+- **api** (32): metered pay-per-token — expensive, use with caution. Subscription tiers are increasingly a capped skin over the same API backend.
+- **local** (21): self-hosted weights, no external billing — cost is compute.
+- **free** (5): free tier, hard rate limits.
+
 ## Matrix
 
-| Harness | id | ctx read | lineage | gate | fails-open | fidelity |
-|---|---|:--:|---|---|---|---|
-| Aider | `aider` | — | independent | no gate seam | — | documented |
-| Amp | `amp` | — | independent | hook engine | undocumented | documented |
-| Antigravity | `antigravity` | ✓ | claude | hook engine | closed | documented |
-| AstrBot | `astrbot` | ✓ | independent | hook engine | undocumented | documented |
-| Auggie (Augment Code) | `auggie` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Claude Code | `claude` | ✓ | canonical | hook engine | **open** ⚠ | verified |
-| Cline | `cline` | ✓ | independent | hook engine | **open** ⚠ | documented |
-| CodeBuddy | `codebuddy` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Codex CLI | `codex` | ✓ | claude | hook engine | **open** ⚠ | verified |
-| Cody | `cody` | — | independent | no gate seam | — | documented |
-| Continue | `continue` | ✓ | independent | no gate seam | undocumented | documented |
-| GitHub Copilot CLI | `copilot_cli` | ✓ | claude | hook engine | closed | documented |
-| Crush | `crush` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Cursor | `cursor` | ✓ | independent | hook engine | **open** ⚠ | documented |
-| DeepAgents (CLI) | `deepagents` | ✓ | independent | hook engine | closed | documented |
-| Devin | `devin` | — | independent | no gate seam | — | documented |
-| Droid (Factory.ai) | `factory_ai_droid` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Firebender | `firebender` | ✓ | independent | no gate seam | undocumented | documented |
-| Forge Code | `forgecode` | ✓ | independent | static policy | closed | documented |
-| Gemini CLI | `gemini` | ✓ | independent | hook engine | **open** ⚠ | documented |
-| Goose | `goose` | ✓ | independent | no gate seam | — | documented |
-| Hermes Agent | `hermes` | ✓ | independent | hook engine | **open** ⚠ | documented |
-| Junie (JetBrains) | `junie` | ✓ | independent | no gate seam | undocumented | documented |
-| Kilo Code | `kilo` | ✓ | opencode | hook engine | undocumented | documented |
-| Kimi Code CLI | `kimi_code_cli` | ✓ | claude | hook engine | **open** ⚠ | verified |
-| Kiro (AWS) | `kiro_cli` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Lingma / Qoder CN CLI | `lingma` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| MiMo Code | `mimocode` | ✓ | opencode | hook engine | undocumented | documented |
-| Mistral Vibe | `mistral_vibe` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Mux | `mux` | ✓ | independent | no gate seam | undocumented | documented |
-| NanoClaw | `nanoclaw` | ✓ | claude | hook engine | **open** ⚠ | inferred |
-| OpenClaw | `openclaw` | ✓ | independent | hook engine | undocumented | documented |
-| OpenCode | `opencode` | ✓ | independent | hook engine | closed | documented |
-| OpenHands | `openhands` | ✓ | independent | hook engine | undocumented | documented |
-| Pi | `pi` | ✓ | independent | hook engine | undocumented | documented |
-| Qoder | `qoder` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Qwen Code | `qwen_code` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Roo Code | `roo_code` | ✓ | cline | no gate seam | — | documented |
-| Rovo Dev CLI | `rovodev` | ✓ | independent | static policy | closed | documented |
-| Shelley | `shelley` | ✓ | independent | hook engine | closed | documented |
-| Tabnine CLI | `tabnine` | ✓ | claude | hook engine | **open** ⚠ | documented |
-| Trae (AI IDE) | `trae` | ✓ | independent | no gate seam | undocumented | documented |
-| Warp (Agent Mode) | `warp` | ✓ | independent | no gate seam | undocumented | documented |
-| Windsurf (Cascade) | `windsurf` | ✓ | independent | hook engine | **open** ⚠ | documented |
-| Zed (Agent Panel) | `zed` | ✓ | independent | no gate seam | undocumented | documented |
+| Harness | id | ctx read | lineage | gate | fails-open | resource | fidelity |
+|---|---|:--:|---|---|---|---|---|
+| Aider | `aider` | — | independent | no gate seam | — | local, api | documented |
+| Amp | `amp` | — | independent | hook engine | undocumented | subscription, api | documented |
+| Antigravity | `antigravity` | ✓ | claude | hook engine | closed | subscription, api | documented |
+| AstrBot | `astrbot` | ✓ | independent | hook engine | undocumented | local, api | documented |
+| Auggie (Augment Code) | `auggie` | ✓ | claude | hook engine | **open** ⚠ | subscription | documented |
+| Claude Code | `claude` | ✓ | canonical | hook engine | **open** ⚠ | subscription, api | verified |
+| Cline | `cline` | ✓ | independent | hook engine | **open** ⚠ | local, api | documented |
+| CodeBuddy | `codebuddy` | ✓ | claude | hook engine | **open** ⚠ | subscription | documented |
+| Codex CLI | `codex` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | verified |
+| Cody | `cody` | — | independent | no gate seam | — | subscription, free | documented |
+| Continue | `continue` | ✓ | independent | no gate seam | undocumented | local, api | documented |
+| GitHub Copilot CLI | `copilot_cli` | ✓ | claude | hook engine | closed | subscription | documented |
+| Crush | `crush` | ✓ | claude | hook engine | **open** ⚠ | local, api | documented |
+| Cursor | `cursor` | ✓ | independent | hook engine | **open** ⚠ | subscription, api | documented |
+| DeepAgents (CLI) | `deepagents` | ✓ | independent | hook engine | closed | local, api | documented |
+| Devin | `devin` | — | independent | no gate seam | — | subscription, api | documented |
+| Droid (Factory.ai) | `factory_ai_droid` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | documented |
+| Firebender | `firebender` | ✓ | independent | no gate seam | undocumented | subscription | documented |
+| Forge Code | `forgecode` | ✓ | independent | static policy | closed | local, api | documented |
+| Gemini CLI | `gemini` | ✓ | independent | hook engine | **open** ⚠ | subscription, api | documented |
+| Goose | `goose` | ✓ | independent | no gate seam | — | local, api | documented |
+| Hermes Agent | `hermes` | ✓ | independent | hook engine | **open** ⚠ | local, api | documented |
+| Junie (JetBrains) | `junie` | ✓ | independent | no gate seam | undocumented | subscription | documented |
+| Kilo Code | `kilo` | ✓ | opencode | hook engine | undocumented | local, api | documented |
+| Kimi Code CLI | `kimi_code_cli` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | verified |
+| Kiro (AWS) | `kiro_cli` | ✓ | claude | hook engine | **open** ⚠ | subscription | documented |
+| Lingma / Qoder CN CLI | `lingma` | ✓ | claude | hook engine | **open** ⚠ | subscription, free | documented |
+| MiMo Code | `mimocode` | ✓ | opencode | hook engine | undocumented | local, api | documented |
+| Mistral Vibe | `mistral_vibe` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | documented |
+| Mux | `mux` | ✓ | independent | no gate seam | undocumented | local, api | documented |
+| NanoClaw | `nanoclaw` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | inferred |
+| OpenClaw | `openclaw` | ✓ | independent | hook engine | undocumented | local, api | documented |
+| OpenCode | `opencode` | ✓ | independent | hook engine | closed | local, api | documented |
+| OpenHands | `openhands` | ✓ | independent | hook engine | undocumented | local, api | documented |
+| Pi | `pi` | ✓ | independent | hook engine | undocumented | local, api | documented |
+| Qoder | `qoder` | ✓ | claude | hook engine | **open** ⚠ | subscription | documented |
+| Qwen Code | `qwen_code` | ✓ | claude | hook engine | **open** ⚠ | api, local, free | documented |
+| Roo Code | `roo_code` | ✓ | cline | no gate seam | — | local, api | documented |
+| Rovo Dev CLI | `rovodev` | ✓ | independent | static policy | closed | subscription | documented |
+| Shelley | `shelley` | ✓ | independent | hook engine | closed | local, api | documented |
+| Tabnine CLI | `tabnine` | ✓ | claude | hook engine | **open** ⚠ | subscription, local | documented |
+| Trae (AI IDE) | `trae` | ✓ | independent | no gate seam | undocumented | subscription, free | documented |
+| Warp (Agent Mode) | `warp` | ✓ | independent | no gate seam | undocumented | subscription, free | documented |
+| Windsurf (Cascade) | `windsurf` | ✓ | independent | hook engine | **open** ⚠ | subscription, api | documented |
+| Zed (Agent Panel) | `zed` | ✓ | independent | no gate seam | undocumented | subscription, api, local | documented |
 
 _ctx read: ✓ = ctx has a read provider for this id; — = talk-to ahead of read (`ctx_provider: none`)._

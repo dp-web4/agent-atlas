@@ -10,6 +10,7 @@ fails_open: n/a
 subagent_hooks_inherited: untested
 config_path: ~/.config/goose/config.yaml (+ permission.yaml)
 config_format: yaml
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://goose-docs.ai/docs/guides/config-files/

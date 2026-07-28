@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.codex/config.toml
 config_format: toml
+resource_type: [subscription, api]
 fidelity: verified
 sources:
   - https://learn.chatgpt.com/docs/hooks

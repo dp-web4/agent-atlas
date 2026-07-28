@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.factory/hooks.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://docs.factory.ai/cli/configuration/hooks-guide

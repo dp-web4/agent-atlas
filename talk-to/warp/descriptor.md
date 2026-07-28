@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: unknown
 config_format: json
+resource_type: [subscription, free]
 fidelity: documented
 sources:
   - https://docs.warp.dev/agent-platform/capabilities/agent-profiles-permissions/

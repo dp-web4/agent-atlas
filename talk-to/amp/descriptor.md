@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.config/amp/settings.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://ampcode.com/manual

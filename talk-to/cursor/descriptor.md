@@ -10,6 +10,7 @@ fails_open: true
 subagent_hooks_inherited: untested
 config_path: ~/.cursor/hooks.json
 config_format: json
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://cursor.com/docs/hooks

@@ -10,6 +10,7 @@ fails_open: unknown
 subagent_hooks_inherited: untested
 config_path: ~/.mux/config.json
 config_format: json
+resource_type: [local, api]
 fidelity: documented
 sources:
   - https://mux.coder.com/reference/cli

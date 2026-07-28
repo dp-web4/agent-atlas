@@ -10,6 +10,7 @@ fails_open: n/a
 subagent_hooks_inherited: untested
 config_path: unknown
 config_format: unknown
+resource_type: [subscription, api]
 fidelity: documented
 sources:
   - https://docs.devin.ai/api-reference/overview
