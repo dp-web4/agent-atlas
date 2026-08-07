@@ -40,6 +40,34 @@ run in warn and enforce modes.
   **Consequence: a gate on Kimi has to be the fail-closed party itself.** Default
   to `exit 2` and only reach `exit 0` on an explicit, confirmed allow; never rely
   on `set -e` or the engine default to deny for you.
+- **Timeout before that fail-open fires (verified against the engine binary,
+  2026-08-07)**: per-hook, from the `[[hooks]]` entry's own `timeout` (seconds),
+  falling back to a built-in default of **30 s** when unset:
+
+  ```js
+  timeout: hook.timeout ?? DEFAULT_HOOK_TIMEOUT_SECONDS   // DEFAULT_HOOK_TIMEOUT_SECONDS = 30
+  ```
+
+  So the configured `timeout` **is** honoured, and an unset one is generous, not
+  tight. Recorded because the fleet had been operating on a remembered figure of
+  **3 s** — off by 5–10×, never sourced, and load-bearing: hestia sized its Kimi
+  gate's internal budget at 800 ms to stay under it, which put the gate's
+  per-request cap below the daemon's p99 and produced intermittent fail-closed
+  denies. Measure the engine, don't inherit the number.
+- **The gate's budget and this timeout are a COUPLED PAIR, and the coupling is a
+  bypass surface.** A fail-closed gate on Kimi must finish inside the hook
+  `timeout`; past it the engine allows. So:
+
+  ```
+  gate internal budget  <  hook timeout  (else the engine fails OPEN)
+  ```
+
+  Raising the gate's budget above the hook timeout does not slow the member down —
+  it **silently un-governs it**. Every gate call overruns, the engine allows, and
+  nothing is logged: no deny to notice, and the witness chain shows nothing missing
+  because nothing was refused. It looks exactly like a well-behaved member. This is
+  worth auditing periodically rather than trusting once, since either number can be
+  edited independently and neither edit looks dangerous on its own.
 
 ## 3. Config
 - **Path**: `~/.kimi-code/config.toml`.
