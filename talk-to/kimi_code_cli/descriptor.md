@@ -62,6 +62,21 @@ run in warn and enforce modes.
   gate internal budget  <  hook timeout  (else the engine fails OPEN)
   ```
 
+  **AMENDED 2026-09-04 — that inequality is wrong by 3×.** Measured on claude-code/CBP
+  against a starved daemon, the budget is not a whole-hook deadline: it is minted once per
+  *entry point* into the shared gate mechanism and one hook invocation crosses several.
+  Wall time fits `3.00 · budget + 1.91 s`, slope exact across three intervals. So:
+
+  ```
+  3.00 · budget  +  1.91 s   <   hook timeout
+  ```
+
+  For Kimi's 30 s the corrected ceiling is ~9.4 s, so this seat is probably still inside
+  it — but that is an inference from claude-code's numbers, **not a measurement of Kimi**,
+  and the audit has not been run here. claude-code, with the tightest harness deadline in
+  the fleet (5 s), FAILS the corrected form and passes the one written above, which is how
+  it went unnoticed. hestia PR #939.
+
   Raising the gate's budget above the hook timeout does not slow the member down —
   it **silently un-governs it**. Every gate call overruns, the engine allows, and
   nothing is logged: no deny to notice, and the witness chain shows nothing missing

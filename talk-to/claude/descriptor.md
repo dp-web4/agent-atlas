@@ -45,6 +45,27 @@ are the verified, load-bearing parts.
   fail-closed by construction**: deny by default, allow only on an explicit
   confirmed pass.
 
+  **Overrun behaviour, MEASURED 2026-09-04 on 2.1.260** (four controlled arms, isolated
+  `--settings`, file-existence as ground truth): `exit 0` → allowed; `exit 2` + stderr →
+  **blocked**; `sleep 1; exit 2` under a 5 s timeout → **blocked** (slow but in time still
+  binds); `sleep 30` under a 2 s timeout → **allowed**, killed at the deadline. The engine
+  does not wait past the timeout and does not treat the kill as a denial.
+
+- **Hook timeout**: per-hook `"timeout"` in seconds in the `hooks` entry. **The hestia
+  `PreToolUse` entry on CBP carries `"timeout": 5`** (measured from the live
+  `~/.claude/settings.json`, 2026-09-04 — not remembered; §17 of hestia's bypass catalogue
+  says in as many words not to source this figure from memory).
+
+  **The Class T pair, audited 2026-09-04: FAILS on this seat.** The invariant in hestia's
+  catalogue and in `kimi_code_cli/descriptor.md` — `gate internal budget < hook timeout` —
+  is wrong by 3×. The budget is minted once per *entry point* into the shared gate
+  mechanism and one hook invocation crosses several; measured wall time is
+  `3.00 · budget + 1.91 s`. Against this seat's 5 s deadline the budget must be below
+  ~1030 ms; the budget in force is 4000 ms, and a starved daemon produces a 12.4 s hook
+  that the engine kills at 5 s and allows. Demonstrated end to end.
+  See hestia PR #939 and
+  `findings/wake-0904b-the-budget-is-consumed-three-times-and-the-harness-quits-first-2026-09-04.md`.
+
 ### Sub-agent inheritance — **verified inherited** (2026-07-26)
 
 Sub-agent tool calls fire the same hooks as the main loop, and they are witnessed.
