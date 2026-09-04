@@ -60,6 +60,19 @@ behavior are stated in the docs.
 - **Knobs that matter**: `matcher` scoping; per-hook timeout (default 60 s); a
   hook must print only the final JSON object to stdout - stray stdout text breaks
   the protocol.
+- **The timeout is in MILLISECONDS here**, where Claude Code, Codex and Kimi all spell
+  theirs in seconds. The deployed `BeforeTool` entry reads `"timeout": 15000` — 15 s, not
+  15000 s. A hook-deadline number quoted across seats is a number read wrong by 1000×.
+- **The Class T pair, measured 2026-09-04 on CBP: this seat PASSES with the most margin in
+  the fleet (6.08 s against 15 s, 59%) — and it does so by implementing the fix the others
+  need.** Its gate does not enter the shared mechanism in-process; it spawns the governor
+  as a subprocess under **its own** deadline (`subprocess.run(…, timeout=6)`) and fails
+  closed in the `except`. That is one deadline minted per invocation and threaded over
+  everything downstream, which is exactly what claude (12.38 s vs 5 s, FAIL) and kimi
+  (16.91 s vs 15 s, FAIL) lack. The cost is that this seat never obtains a real verdict
+  under daemon starvation and takes the ratified degraded path instead — correct, and what
+  the failing seats cannot do because nothing holds a clock over them. hestia PR #939,
+  `tools/class_t_seat_audit.py`.
 
 ## 4. Transcript pointer
 - **Path pattern**: Gemini CLI keeps session/checkpoint state under `~/.gemini/`

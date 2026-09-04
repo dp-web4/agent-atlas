@@ -59,12 +59,26 @@ are the verified, load-bearing parts.
   **The Class T pair, audited 2026-09-04: FAILS on this seat.** The invariant in hestia's
   catalogue and in `kimi_code_cli/descriptor.md` — `gate internal budget < hook timeout` —
   is wrong by 3×. The budget is minted once per *entry point* into the shared gate
-  mechanism and one hook invocation crosses several; measured wall time is
-  `3.00 · budget + 1.91 s`. Against this seat's 5 s deadline the budget must be below
-  ~1030 ms; the budget in force is 4000 ms, and a starved daemon produces a 12.4 s hook
-  that the engine kills at 5 s and allows. Demonstrated end to end.
-  See hestia PR #939 and
-  `findings/wake-0904b-the-budget-is-consumed-three-times-and-the-harness-quits-first-2026-09-04.md`.
+  mechanism and one hook invocation crosses several. A starved daemon produces a 12.4 s
+  hook that the engine kills at 5 s and allows. Demonstrated end to end.
+
+  **Refined 2026-09-04 (same day), by sweeping past the per-request cap:** the composition
+  is not linear in the budget. It is
+
+  ```
+  wall = 3 · min(budget, REQUEST_TIMEOUT_S) + c_seat        (REQUEST_TIMEOUT_S = 5 s)
+  ```
+
+  because a window ends when its *first* request gives up. Measured on this seat at
+  2/4/6/10/20 s: 6.40 / 12.43 / 15.38 / 15.39 / 15.41 — so there is a **ceiling of 15.38 s
+  that no budget can exceed**, and this seat fits its 5 s deadline only below a **1539 ms**
+  budget. In force: 4000 ms. The three windows are the policy-snapshot fetch, its *retry*,
+  and the society-safety query — two mint sites, three mint events.
+
+  Fleet at the same date: codex 13.91 s vs 15 s (pass, 1.09 s margin), kimi 16.91 s vs 15 s
+  (**FAIL**), gemini 6.08 s vs 15 s (pass). See hestia PR #939,
+  `tools/class_t_seat_audit.py`, and
+  `findings/wake-0904c-no-budget-is-safe-the-ceiling-belongs-to-the-request-cap-2026-09-04.md`.
 
 ### Sub-agent inheritance — **verified inherited** (2026-07-26)
 

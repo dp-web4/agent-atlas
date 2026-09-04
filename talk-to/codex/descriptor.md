@@ -83,4 +83,15 @@ else — event dispatch, deny path, sandbox, plugin install — is confirmed.
 - **Two approval surfaces** (`PreToolUse` + `PermissionRequest`) — a gate should cover both.
 - **Fail-open + slow FS**: on WSL, keep hook scripts on local ext4, not a 9p `/mnt/c` path — a cold-load
   timeout would make the fail-open gate silently open.
+- **Hook timeout, and the Class T pair — MEASURED 2026-09-04 on CBP.** The deployed
+  `[[hooks.PreToolUse]]` entry carries `timeout = 15` (seconds). Against a starved daemon
+  the hestia gate reaches its verdict at **13.91 s**, so this seat **passes — by 1.09 s,
+  7% of its deadline.** The composition is
+  `3 · min(budget, 5 s) + 1.91 s`; the `1.91 s` is a 250 ms retry backoff plus a **1.5 s
+  un-budgeted witness client this seat runs on the ORDINARY path** (claude runs it only on
+  the governance path and pays 0.38 s). So the safe budget ceiling here is **4362 ms** and
+  the shared engine default in force is **4000 ms** — 362 ms of margin on a constant whose
+  history is `800 → 2500 → 4000`, each step taken to fix real false denials. The next
+  increment of the same size un-governs this seat. hestia PR #939,
+  `tools/class_t_seat_audit.py`.
 - Reference adapter (this project): [hestia/plugins/codex](https://github.com/dp-web4/hestia/tree/main/plugins/codex).

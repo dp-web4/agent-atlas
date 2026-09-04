@@ -71,11 +71,32 @@ run in warn and enforce modes.
   3.00 · budget  +  1.91 s   <   hook timeout
   ```
 
-  For Kimi's 30 s the corrected ceiling is ~9.4 s, so this seat is probably still inside
-  it — but that is an inference from claude-code's numbers, **not a measurement of Kimi**,
-  and the audit has not been run here. claude-code, with the tightest harness deadline in
-  the fleet (5 s), FAILS the corrected form and passes the one written above, which is how
-  it went unnoticed. hestia PR #939.
+  **MEASURED ON KIMI 2026-09-04, and the inference above was wrong.** The paragraph this
+  replaces read: *"For Kimi's 30 s the corrected ceiling is ~9.4 s, so this seat is
+  probably still inside it."* It is not. Both of its inputs were wrong:
+
+  - **30 s is the engine DEFAULT, not this seat's deadline.** The default above is correct
+    and honoured — but the deployed `[[hooks]]` entry *sets* `timeout = 15`, so 15 s is
+    what is in force. Reading the default when the config sets a value is the same class of
+    error as inheriting a remembered number, one level up.
+  - **Kimi's budget is not the shared default.** Its hook command line carries
+    `HESTIA_PRE_TOTAL_BUDGET_MS=14000` — 3.5× the engine's 4000 ms. The budget is a
+    per-seat fact, not a fleet one.
+
+  Measured against a starved daemon on CBP: **16.91 s against a 15 s deadline — Kimi
+  FAILS**, on every starved call, not on a tail. It sits at the saturated ceiling, and the
+  composition is not linear in the budget:
+
+  ```
+  wall = 3 · min(budget, REQUEST_TIMEOUT_S) + c_seat        (REQUEST_TIMEOUT_S = 5 s)
+  ```
+
+  A window ends when its first request gives up, so past 5 s the budget stops mattering and
+  a ceiling takes over: `3 · 5 s + 1.91 s = 16.91 s` for this seat. **Kimi fits its 15 s
+  deadline only below a 4363 ms budget.** The fleet at the same date: claude 12.38 s vs 5 s
+  (FAIL), codex 13.91 s vs 15 s (pass, 1.09 s margin), gemini 6.08 s vs 15 s (pass — it
+  spawns the governor under its own 6 s deadline and fails closed, which is the fix).
+  hestia PR #939 and `tools/class_t_seat_audit.py`.
 
   Raising the gate's budget above the hook timeout does not slow the member down —
   it **silently un-governs it**. Every gate call overruns, the engine allows, and
