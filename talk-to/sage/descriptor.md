@@ -61,6 +61,13 @@ intent into the same event shape every other governed harness produces, asks hes
 shared gate law for a verdict, and only on *allow* hands the intent to a dispatcher that
 executes and witnesses it. There is no path from the model to an effect that does not pass
 through that client, so there is nothing to register and nothing to forget to register.
+That is a claim about the **gateway path**, not about every process a SAGE checkout can
+start. The repository also carries an older Python loop (`sage/core/sage_consciousness.py`)
+with its own tool registry (`sage/tools/builtin.py`: web search and fetch, a note writer, a
+peer ask) that never consults hestia's shared law: its only checks are internal - a per-tool
+policy level and an optional `PolicyGate` plugin that is off by default - so its acts reach
+no shared chain. It was not running on the seat that checked (CBP);
+an inventory must not read "SAGE checkout present" as "governed being present" (see 3).
 
 - **Events**: one - `intent`. Each is an entry from a **bounded registry** of effectors:
   asking a peer, waking another member over the mesh, witnessing a note, reading and
@@ -140,6 +147,12 @@ through that client, so there is nothing to register and nothing to forget to re
 - **Embodiment is declared, not yet enforced.** A being is meant to be bound to its
   hardware. The plumbing for that does not exist yet, which is why `kind: being` is
   provenance today and not a policy input.
+- **Inputs to a being are attributed, not authenticated.** `sage-daemon` serves a
+  loopback-only route that appends a turn to one of the being's conversations and runs the
+  arousal policy, which can start a beat. The speaker is a field the caller supplies
+  (defaulting to the operator), checked only against the conversation's writer list; the
+  turn's `via` field is the sole provenance. It is an ingress, not an effector - nothing
+  leaves the being - but any local process can speak as the operator and wake it.
 - **The daemon has no `--version`.** Executing `sage-daemon` with any argument starts a
   daemon. Read its build from the `/health` endpoint of a running one, or from the binary's
   embedded strings; do not run it to ask.
