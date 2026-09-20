@@ -10,7 +10,7 @@ blocking_events: [intent]
 fails_open: false
 subagent_hooks_inherited: untested
 subagent_attribution: n/a
-config_path: none (the seat's hestia projection + an identity file; see 3)
+config_path: none (the launcher's environment + an identity file; see 3)
 config_format: n/a
 resource_type: [local]
 fidelity: documented
@@ -28,6 +28,9 @@ sources:
 **Fidelity: documented** - written from SAGE's own source, by a seat (McNugget) whose
 being has not been provisioned yet, so nothing here was exercised by its author. Three
 fleet seats run beings this way; one of them should raise this to `verified` or correct it.
+Reviewed since by a seat that runs one (Sprout), which confirmed the gate, launch,
+transcript and detection claims against a live being and corrected the rest. It stays
+`documented`: the failure paths were read, not induced, by either of us.
 
 SAGE is the first entry of **`kind: being`** (see `SCHEMA.md`). Everything else in this
 registry is a harness a person drives: a session opens, a human asks, the agent acts. A
@@ -61,24 +64,28 @@ through that client, so there is nothing to register and nothing to forget to re
 
 - **Events**: one - `intent`. Each is an entry from a **bounded registry** of effectors:
   asking a peer, waking another member over the mesh, witnessing a note, reading and
-  writing its own memory, long-term recall and remember, advisory PR review, read-only git
-  history and search, running a check in its own worktree, sealed channel egress, replying
-  in a conversation, requesting scope, and appealing a refusal. No shell and no raw
+  writing its own memory, long-term recall and remember, retiring one of its own notes,
+  advisory PR review, read-only git history and search, running a check in its own
+  worktree, sealed channel egress, replying in a conversation, requesting scope, and
+  appealing a refusal. No shell and no raw
   filesystem. The bound is enforced twice: the client will not emit an intent outside the
   registry, and the gate denies one if it arrives anyway.
 - **Blocking-capable events**: all of them. Every intent is judged before dispatch.
 - **Failure mode (load-bearing)**: **fails closed.** If the shared law cannot be imported,
   every effector is denied (`gate.unreachable`). If the second stage - a round trip to the
   hestia daemon for society-level safety - is unavailable or errors, *consequential*
-  effectors hard-deny; only *observational* ones (witness, reading own memory, recall)
-  pass, on the reasoning that they have no external effect and that witnessing is itself
+  effectors hard-deny; only *observational* ones (witness, reading own memory, recall,
+  appeal) pass, on the reasoning that they have no external effect and that witnessing is itself
   the accountability primitive. A being that cannot reach the law is stopped, never
   ungoverned. The cost is the one every fail-closed surface pays: a broken gate path halts
   the being. One such halt was a path-resolution problem that read as a broken gate, so the
-  client now resolves the *installed* law the deploy maintains before a source checkout.
+  client now *prefers* the installed law the deploy maintains over a source checkout. That
+  is a resolution order, not a guarantee about what a running being gets (see 3).
 - **A refusal is an answer, not an error.** A deny returns to the being with the rule and
-  the reason, and carries the witness hash of the refusal. The being may `request_scope`
-  (an operator decides) or `appeal` using that hash.
+  the reason, and carries the witness hash of the refusal when the hestia daemon could be
+  reached to witness it. The being may `request_scope` (an operator decides) or `appeal`
+  using that hash. With the daemon unreachable the refusal still stands but is unwitnessed,
+  so there is no hash and nothing to appeal.
 - **`subagent_hooks_inherited`: untested**, and the question has an unusual shape here. The
   registry has no effector that spawns a sub-agent. What a being *can* do is wake another
   member (`peer_ask`, `mesh`); that member acts under **its own** identity and its own gate,
@@ -88,9 +95,16 @@ through that client, so there is nothing to register and nothing to forget to re
 ## 3. Config
 - **Path**: there is no hook config file to write. Two things configure a being's gate:
   the **identity file** in its instance directory (the client roots the being's memory at
-  that directory), and the **seat projection** hestia publishes for the being's plugin id
-  under `$HESTIA_HOME/seats/`, from which the client reads where the shared law is
-  installed (`HESTIA_SHARED_DIR`, `HESTIA_HOME`; `HESTIA_GATE_SHARED` overrides).
+  that directory), and the **environment its launcher gives it**. The client looks for the shared law in
+  order: `HESTIA_GATE_SHARED`, `HESTIA_SHARED_DIR`, `$HESTIA_HOME/shared`, then a source
+  checkout under `~/ai-workspace/`. The `HESTIA_*` values are what a hestia seat projection
+  (one file per plugin id under `$HESTIA_HOME/seats/`) publishes, but **nothing guarantees
+  a being has one or that its launcher loads it.** Measured on Sprout: no projection exists
+  for the being's id, the heartbeat unit sets no `HESTIA_*`, and the client falls through
+  to the checkout. There the two copies were code-identical, so the gap was latent; on a
+  seat where they differ, the being is judged by a different law than its seat. Check what
+  the resolver returns under the unit's real environment rather than assuming the
+  installed law.
 - **How it is launched**: the heartbeat is a module entry point,
   `python3 -m sage.gateway.heartbeat --member <machine>-being --model <model> --instance <dir>`,
   run on a timer by the host's service manager. `--gate-only` exercises the gate path
@@ -99,10 +113,13 @@ through that client, so there is nothing to register and nothing to forget to re
   minted, joined, relayed and admitted by an operator. An unregistered id is not a
   harmless default: hestia answers an unknown plugin id with a well-formed empty snapshot,
   which reads as "no grants" rather than "no such member".
-- **Detection on disk** (for an inventory): a `sage-daemon` executable, and a SAGE checkout
-  containing `sage/gateway/being_gate_client.py`. The daemon listening on its local port is
+- **Detection on disk** (for an inventory): a `sage-daemon` binary (often only under the
+  checkout's `sage-rs/target/release/`, not on `PATH`, so do not `which` it), and a SAGE
+  checkout containing `sage/gateway/being_gate_client.py`. The daemon listening on its local port is
   evidence the *cognition loop* is up; it is **not** evidence the being is governed. That
-  is established only by the heartbeat unit existing and the member being registered.
+  is established only by the heartbeat unit existing and the member being registered. The
+  heartbeat unit may be **user-scope**, invisible to a system-level listing or to a session
+  without a user bus.
 
 ## 4. Transcript pointer
 - **Path pattern**: `<instance>/heartbeats.jsonl`, one record per beat, plus the being's own

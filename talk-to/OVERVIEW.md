@@ -2,7 +2,7 @@
 
 > **Generated** from each `talk-to/<id>/descriptor.md` frontmatter by `gen-overview.py`. Do not edit by hand; regenerate after changing a descriptor. Every cell traces to a descriptor's frontmatter.
 
-**46 harnesses.** 31 expose a hook/plugin gate engine, 2 gate only via static policy, 12 have no external gate seam (gate them from outside). 16 run Claude Code's hook engine (canonical or lineage) — the most-cloned integration surface. 5 are talk-to ahead of ctx's read side. 1 is a being rather than a driven harness (`kind: being`); 1 of those gate by construction — no effectors of their own, every intent judged before dispatch.
+**46 harnesses.** 31 expose a hook/plugin gate engine, 2 gate only via static policy, 12 have no external gate seam (gate them from outside). 16 run Claude Code's hook engine (canonical or lineage) — the most-cloned integration surface. 5 are talk-to ahead of ctx's read side. 1 is a being rather than a driven harness (`kind: being`); it gates by construction — a being holds no effectors, every intent is judged before dispatch.
 
 **Failure mode across the hook engines is not monolithic** — the load-bearing fact for anyone building a gate:
 
@@ -10,7 +10,7 @@
 - **fails closed** (5): a failed hook *denies* — safer, but a slow gate can halt the agent.
 - **undocumented** (7): the vendor spec omits the error/timeout behavior. Treat as fail-open until verified.
 
-Fidelity: 3 verified (wired against the real harness), 42 documented (from vendor docs), 1 inferred.
+Fidelity: 3 verified (wired against the real harness), 42 documented (from vendor docs or public source), 1 inferred.
 
 **Resource type** — how you pay to run the model, so how freely it can be used (a harness may offer several):
 

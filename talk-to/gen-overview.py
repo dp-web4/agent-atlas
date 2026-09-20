@@ -91,8 +91,9 @@ def main():
                f"hook engine (canonical or lineage) — the most-cloned integration surface. "
                f"{len(ahead)} are talk-to ahead of ctx's read side."
                + (f" {len(beings)} {'is a being' if len(beings) == 1 else 'are beings'} rather than a "
-                  f"driven harness (`kind: being`); {len(builtin)} of those gate by construction "
-                  "— no effectors of their own, every intent judged before dispatch." if beings else "")
+                  f"driven harness (`kind: being`); "
+                  f"{'it gates' if len(beings) == len(builtin) == 1 else f'{len(builtin)} of those gate'} by construction "
+                  "— a being holds no effectors, every intent is judged before dispatch." if beings else "")
                + "\n")
     out.append("**Failure mode across the hook engines is not monolithic** — the load-"
                "bearing fact for anyone building a gate:\n")
@@ -104,7 +105,7 @@ def main():
                "behavior. Treat as fail-open until verified.\n")
     out.append(f"Fidelity: {len(verified)} verified (wired against the real harness), "
                f"{len([r for r in rows if r.get('fidelity')=='documented'])} documented "
-               f"(from vendor docs), {len([r for r in rows if r.get('fidelity')=='inferred'])} "
+               f"(from vendor docs or public source), {len([r for r in rows if r.get('fidelity')=='inferred'])} "
                "inferred.\n")
 
     def rescount(tok):

@@ -41,11 +41,11 @@ consume the registry without parsing prose.
 ## Coverage today
 
 - **Read: 41 coding-agent harnesses**, inherited from ctx's provider registry. See [`read/providers.md`](read/providers.md).
-- **Talk-to: 45 descriptors** — 41 joined to a ctx read provider, plus 4 ahead of read (`aider`, `amp`, `cody`, `devin`, which ctx does not yet cover). Each has a `fidelity` mark in its frontmatter:
+- **Talk-to: 46 descriptors** — 41 joined to a ctx read provider, plus 5 ahead of read (`aider`, `amp`, `cody`, `devin`, `sage`, which ctx does not yet cover). Each has a `fidelity` mark in its frontmatter:
   - **verified** (2): [`claude`](talk-to/claude/descriptor.md) and [`kimi_code_cli`](talk-to/kimi_code_cli/descriptor.md), derived from live adapters in [hestia](https://github.com/dp-web4/hestia) and exercised in production.
   - **documented / inferred** (the rest): built from each vendor's official docs, cited per fact, not yet wired against the real harness.
 
-For a one-screen taxonomy of every descriptor — gate type, lineage, and the load-bearing fail-open/closed behavior — see **[`talk-to/OVERVIEW.md`](talk-to/OVERVIEW.md)** (generated from the descriptors' frontmatter). A finding worth stating up front: **16 of the 45 run Claude Code's hook engine** (canonical or lineage), the single most-cloned integration surface — but their failure modes are *not* uniform (some fail open, some fail closed, some undocumented), which is exactly the trap a cross-harness gate must not assume away.
+For a one-screen taxonomy of every descriptor — gate type, lineage, and the load-bearing fail-open/closed behavior — see **[`talk-to/OVERVIEW.md`](talk-to/OVERVIEW.md)** (generated from the descriptors' frontmatter). A finding worth stating up front: **16 of the 46 run Claude Code's hook engine** (canonical or lineage), the single most-cloned integration surface — but their failure modes are *not* uniform (some fail open, some fail closed, some undocumented), which is exactly the trap a cross-harness gate must not assume away.
 
 The fidelity mark is the honesty knob: a `documented` descriptor is a solid starting point drawn from vendor docs; raising it to `verified` means someone wired it against the real harness and ran it. Both improving a descriptor and lifting its fidelity are documentation tasks, not code ports. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
