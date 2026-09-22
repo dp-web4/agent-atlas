@@ -41,6 +41,7 @@ important field is `fails_open`: whether a blocking hook that errors resolves to
 harness: Claude Code             # display name
 ctx_provider: claude             # matches the directory name and read/providers.md
 vendor: Anthropic
+kind: harness                    # harness | being — OPTIONAL, absent means harness (see below)
 lineage: canonical               # canonical | <ctx_provider_id it clones> | independent
 hook_engine: true                # does it expose ANY hook/plugin/gate surface?
 blocking_capable: true           # can any event deny/block an action?
@@ -58,6 +59,23 @@ sources:
 If a harness exposes no integration surface at all (a pure autocomplete plugin, a
 closed cloud IDE), say so honestly: `hook_engine: false`, `blocking_capable: false`,
 and a one-line prose note on why. Recorded absence is a real finding, not a gap.
+
+### `kind`: what sort of thing is being described (optional)
+
+- **`harness`** (the default; omit the field) — a tool a person drives. A session opens, a
+  human asks, the agent acts, the session ends.
+- **`being`** — a locally hosted model with a persistent identity and memory of its own,
+  that acts without a human opening a session (a heartbeat wakes it). From a governance
+  point of view it **is a harness like any other**: it has an id, its acts are judged by the
+  same law and land in the same record. The tag is **provenance**. A consumer must not
+  relax or tighten anything because of it; it exists so that a registry listing a being next
+  to forty-five coding assistants says that they are different kinds of thing.
+
+A being typically has **no hook engine** and is still `blocking_capable: true`, because its
+gate is built in rather than registered: it holds no effectors and every intent passes a
+gate client before dispatch. Record that as `hook_engine: false`, `blocking_capable: true`,
+with `fails_open` stated as for any other entry. `gen-overview.py` reports this combination
+as **built-in gate** when `kind: being`, since "static policy" would misdescribe it.
 
 ### `resource_type`: the access/cost profile (list)
 

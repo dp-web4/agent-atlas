@@ -2,7 +2,7 @@
 
 > **Generated** from each `talk-to/<id>/descriptor.md` frontmatter by `gen-overview.py`. Do not edit by hand; regenerate after changing a descriptor. Every cell traces to a descriptor's frontmatter.
 
-**45 harnesses.** 31 expose a hook/plugin gate engine, 2 gate only via static policy, 12 have no external gate seam (gate them from outside). 16 run Claude Code's hook engine (canonical or lineage) — the most-cloned integration surface. 4 are talk-to ahead of ctx's read side.
+**46 harnesses.** 31 expose a hook/plugin gate engine, 2 gate only via static policy, 12 have no external gate seam (gate them from outside). 16 run Claude Code's hook engine (canonical or lineage) — the most-cloned integration surface. 5 are talk-to ahead of ctx's read side. 1 is a being rather than a driven harness (`kind: being`); it gates by construction — a being holds no effectors, every intent is judged before dispatch.
 
 **Failure mode across the hook engines is not monolithic** — the load-bearing fact for anyone building a gate:
 
@@ -10,13 +10,13 @@
 - **fails closed** (5): a failed hook *denies* — safer, but a slow gate can halt the agent.
 - **undocumented** (7): the vendor spec omits the error/timeout behavior. Treat as fail-open until verified.
 
-Fidelity: 3 verified (wired against the real harness), 41 documented (from vendor docs), 1 inferred.
+Fidelity: 3 verified (wired against the real harness), 42 documented (from vendor docs or public source), 1 inferred.
 
 **Resource type** — how you pay to run the model, so how freely it can be used (a harness may offer several):
 
 - **subscription** (26): usage-limited, seat/plan-covered, no per-call charge — the safe default for sustained work.
 - **api** (31): metered pay-per-token — expensive, use with caution. Subscription tiers are increasingly a capped skin over the same API backend.
-- **local** (21): self-hosted weights, no external billing — cost is compute.
+- **local** (22): self-hosted weights, no external billing — cost is compute.
 - **free** (6): free tier, hard rate limits.
 
 ## Matrix
@@ -62,6 +62,7 @@ Fidelity: 3 verified (wired against the real harness), 41 documented (from vendo
 | Qwen Code | `qwen_code` | ✓ | claude | hook engine | **open** ⚠ | api, local, free | documented |
 | Roo Code | `roo_code` | ✓ | cline | no gate seam | — | local, api | documented |
 | Rovo Dev CLI | `rovodev` | ✓ | independent | static policy | closed | subscription | documented |
+| SAGE _(being)_ | `sage` | — | independent | built-in gate | closed | local | documented |
 | Shelley | `shelley` | ✓ | independent | hook engine | closed | local, api | documented |
 | Tabnine CLI | `tabnine` | ✓ | claude | hook engine | **open** ⚠ | subscription, local | documented |
 | Trae (AI IDE) | `trae` | ✓ | independent | no gate seam | undocumented | subscription, free | documented |

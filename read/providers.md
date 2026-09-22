@@ -87,8 +87,8 @@ have no talk-to surface (there is nothing to gate):
 
 ---
 
-**Read: 41 coding-agent harnesses** (from ctx). **Talk-to: 45 descriptors** — 41
-joined to a ctx read provider plus 4 ahead of read (`aider`, `amp`, `cody`, `devin`).
+**Read: 41 coding-agent harnesses** (from ctx). **Talk-to: 46 descriptors** — 41
+joined to a ctx read provider plus 5 ahead of read (`aider`, `amp`, `cody`, `devin`, `sage`).
 Each carries a `fidelity` mark in its frontmatter (`verified` for `claude` and
 `kimi_code_cli`, which run against live hestia adapters; `documented` / `inferred` for
 the rest, sourced from vendor docs). For a one-screen taxonomy of all descriptors —

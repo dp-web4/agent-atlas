@@ -13,7 +13,7 @@ import os
 import glob
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FIELDS = ("harness", "ctx_provider", "vendor", "lineage", "hook_engine",
+FIELDS = ("harness", "ctx_provider", "vendor", "kind", "lineage", "hook_engine",
           "blocking_capable", "fails_open", "fidelity", "resource_type")
 
 
@@ -37,7 +37,9 @@ def gate_class(fm):
     if fm.get("hook_engine") == "true" and fm.get("blocking_capable") == "true":
         return "hook engine"
     if fm.get("blocking_capable") == "true":
-        return "static policy"
+        # A being holds no effectors: its gate is built in, not registered and not a static
+        # allow-list. Calling that "static policy" would misdescribe it (SCHEMA.md, `kind`).
+        return "built-in gate" if fm.get("kind") == "being" else "static policy"
     return "no gate seam"
 
 
@@ -69,6 +71,8 @@ def main():
     hook = [r for r in rows if gate_class(r) == "hook engine"]
     static = [r for r in rows if gate_class(r) == "static policy"]
     none = [r for r in rows if gate_class(r) == "no gate seam"]
+    builtin = [r for r in rows if gate_class(r) == "built-in gate"]
+    beings = [r for r in rows if r.get("kind") == "being"]
     claude_line = [r for r in rows if r.get("lineage") in ("claude", "canonical")]
     open_ = [r for r in hook if r.get("fails_open") == "true"]
     closed = [r for r in hook if r.get("fails_open") == "false"]
@@ -85,7 +89,12 @@ def main():
                f"{len(static)} gate only via static policy, {len(none)} have no external "
                f"gate seam (gate them from outside). {len(claude_line)} run Claude Code's "
                f"hook engine (canonical or lineage) — the most-cloned integration surface. "
-               f"{len(ahead)} are talk-to ahead of ctx's read side.\n")
+               f"{len(ahead)} are talk-to ahead of ctx's read side."
+               + (f" {len(beings)} {'is a being' if len(beings) == 1 else 'are beings'} rather than a "
+                  f"driven harness (`kind: being`); "
+                  f"{'it gates' if len(beings) == len(builtin) == 1 else f'{len(builtin)} of those gate'} by construction "
+                  "— a being holds no effectors, every intent is judged before dispatch." if beings else "")
+               + "\n")
     out.append("**Failure mode across the hook engines is not monolithic** — the load-"
                "bearing fact for anyone building a gate:\n")
     out.append(f"- **fails open** ({len(open_)}): a failed/timed-out blocking hook resolves "
@@ -96,7 +105,7 @@ def main():
                "behavior. Treat as fail-open until verified.\n")
     out.append(f"Fidelity: {len(verified)} verified (wired against the real harness), "
                f"{len([r for r in rows if r.get('fidelity')=='documented'])} documented "
-               f"(from vendor docs), {len([r for r in rows if r.get('fidelity')=='inferred'])} "
+               f"(from vendor docs or public source), {len([r for r in rows if r.get('fidelity')=='inferred'])} "
                "inferred.\n")
 
     def rescount(tok):
@@ -120,7 +129,7 @@ def main():
     for r in rows:
         read = "—" if r.get("ctx_provider") == "none" else "✓"
         out.append("| {h} | `{i}` | {rd} | {ln} | {g} | {fo} | {rs} | {fi} |".format(
-            h=r.get("harness", r["_id"]), i=r["_id"], rd=read,
+            h=r.get("harness", r["_id"]) + (" _(being)_" if r.get("kind") == "being" else ""), i=r["_id"], rd=read,
             ln=r.get("lineage", "?"), g=gate_class(r), fo=fail_cell(r),
             rs=res_cell(r), fi=r.get("fidelity", "?")))
     out.append("")
