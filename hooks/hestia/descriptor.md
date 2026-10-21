@@ -20,6 +20,22 @@ The local governance layer. Its gates (`pre_tool_use.py` for Claude Code, Codex 
 Its witness and observe hooks record outcomes. Its member-mesh hooks deliver notices at
 SessionStart.
 
+**What `fidelity: verified` covers, per harness (re-checked 2026-10-14).** The provenance
+rules and the gate/observe roles below are read from hestia's source. Live exercise differs
+by harness, and a consumer should not read the `harnesses` list as "all live":
+
+| harness | hestia hook | live status |
+|---|---|---|
+| Claude Code | gate + witness | gated, in daily use |
+| Codex | gate + witness | gated, in daily use |
+| Kimi Code | gate + witness | gated, in daily use |
+| Gemini CLI | gate (`before_tool.py`) | same common gate in code; **verified live once, 2026-07-22; not in daily use** |
+| Cursor | witness only | **observe-only**: no pre-tool gate exists, so it is not in `harnesses` above |
+
+Since hestia's one-gate stage C (hestia #1231, 2026-10-05) all four gate hooks are the same
+certified shim calling one common gate, so the Gemini path is the same code as the live
+three; what it lacks is ongoing live exercise.
+
 **Identified by provenance, not by path.** A hook is hestia's when one of these holds:
 - its path is one a hestia plugin's `expects.json` declares installing (`install.dest` + `files`);
 - its path is in the deploy record (`$HESTIA_HOME/current-build.json`);

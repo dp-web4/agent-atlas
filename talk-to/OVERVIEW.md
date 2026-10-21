@@ -10,7 +10,7 @@
 - **fails closed** (5): a failed hook *denies* — safer, but a slow gate can halt the agent.
 - **undocumented** (7): the vendor spec omits the error/timeout behavior. Treat as fail-open until verified.
 
-Fidelity: 3 verified (wired against the real harness), 42 documented (from vendor docs or public source), 1 inferred.
+Fidelity: 4 verified (wired against the real harness), 41 documented (from vendor docs or public source), 1 inferred.
 
 **Resource type** — how you pay to run the model, so how freely it can be used (a harness may offer several):
 
@@ -42,7 +42,7 @@ Fidelity: 3 verified (wired against the real harness), 42 documented (from vendo
 | Droid (Factory.ai) | `factory_ai_droid` | ✓ | claude | hook engine | **open** ⚠ | subscription, api | documented |
 | Firebender | `firebender` | ✓ | independent | no gate seam | undocumented | subscription | documented |
 | Forge Code | `forgecode` | ✓ | independent | static policy | closed | local, api | documented |
-| Gemini CLI | `gemini` | ✓ | independent | hook engine | **open** ⚠ | subscription, api | documented |
+| Gemini CLI | `gemini` | ✓ | independent | hook engine | **open** ⚠ | subscription, api | verified |
 | Goose | `goose` | ✓ | independent | no gate seam | — | local, api | documented |
 | Hermes Agent | `hermes` | ✓ | independent | hook engine | **open** ⚠ | local, api | documented |
 | Junie (JetBrains) | `junie` | ✓ | independent | no gate seam | undocumented | subscription | documented |

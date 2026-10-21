@@ -11,18 +11,30 @@ subagent_hooks_inherited: untested
 config_path: ~/.gemini/settings.json
 config_format: json
 resource_type: [subscription, api]
-fidelity: documented
+fidelity: verified
 sources:
   - https://github.com/google-gemini/gemini-cli/blob/main/docs/hooks/reference.md
   - https://developers.googleblog.com/tailor-gemini-cli-to-your-workflow-with-hooks/
   - https://geminicli.com/docs/hooks/reference/
+  - https://github.com/dp-web4/hestia/blob/main/plugins/gemini/README.md
 ---
 
 # Talk-to: Gemini CLI
 
-**Fidelity: documented** - built from Google's official `gemini-cli` hooks
-reference; the exit-code semantics and the fail-open-on-unexpected-failure
-behavior are stated in the docs.
+**Fidelity: verified, once (2026-07-22); not in daily use.** Built from Google's
+official `gemini-cli` hooks reference and the gemini-cli source. On 2026-07-22 a
+hestia gate was wired in as the real `BeforeTool` hook of an installed gemini-cli
+0.52.0 and fired with model round trips: an in-scope read was allowed, and
+out-of-scope reads, traversal, symlink escape, an out-of-scope shell command, a
+governor deny and malformed JSON were all denied, with the reason surfaced to the
+model; argument names (`read_file` -> `file_path`, `run_shell_command` ->
+`command`) were confirmed live ([hestia/plugins/gemini](https://github.com/dp-web4/hestia/blob/main/plugins/gemini/README.md)).
+That meets this registry's `verified` bar (wired against the real harness and
+exercised). It was a single pass: Gemini is not a seat in daily use, so drift in
+later gemini-cli versions is unobserved. The fail-open-on-unexpected-failure
+behavior below is from the docs and source, not from a live crash test.
+(Previously marked `documented`, which understated the live pass; corrected
+2026-10-14.)
 
 ## 1. Identity
 - **Harness**: Gemini CLI (Google), the open-source `google-gemini/gemini-cli`
@@ -73,6 +85,10 @@ behavior are stated in the docs.
   under daemon starvation and takes the ratified degraded path instead — correct, and what
   the failing seats cannot do because nothing holds a clock over them. hestia PR #939,
   `tools/class_t_seat_audit.py`.
+  *2026-10-14: superseded.* Since hestia's one-gate stage C (hestia #1231, 2026-10-05) the
+  Gemini hook is the same certified template shim as the other seats: it calls the common
+  gate in-process, with a deadline derived from the registered timeout (read in milliseconds
+  here) for every seat, not a subprocess with its own timeout.
 
 ## 4. Transcript pointer
 - **Path pattern**: Gemini CLI keeps session/checkpoint state under `~/.gemini/`

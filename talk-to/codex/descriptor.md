@@ -27,6 +27,8 @@ source-verified against `codex-rs` and the installed binary (codex-cli 0.145.0),
 governance adapter is wired + config-validated ([hestia/plugins/codex](https://github.com/dp-web4/hestia/tree/main/plugins/codex)).
 The one piece not yet exercised is a live model session firing the hooks (pends auth); everything
 else — event dispatch, deny path, sandbox, plugin install — is confirmed.
+*2026-10-14:* that remaining piece is now exercised. Codex runs as a hestia-gated seat in daily
+use on CBP (its gate hooks fire in live model sessions and its seat decides peer scope requests).
 
 ## 1. Identity
 - **Harness**: Codex CLI (OpenAI) — the Rust `codex-rs` binary, installed via `npm i -g @openai/codex`.
